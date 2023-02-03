@@ -1,0 +1,242 @@
+---
+type: normal
+statement: |
+  <p>Each part of a Numbas question asks the student to enter an answer, and is marked automatically. There are several part types, each with their own input methods and settings.</p>
+  <p><em><a href="https://numbas.mathcentre.ac.uk/question/8283/numbas-demo-part-types/" target="_blank" rel="noopener noreferrer">See this question on the public editor.</a></em></p>
+advice: ""
+parts:
+  - type: number_entry
+    marks: 1
+    prompt: |
+      <p><em>The number entry part asks the student to write a single number. It's marked correct if it's in the accepted range.</em></p>
+      <p>I eat 5 apples per day. How many apples do I eat in a week?</p>
+    part_name: Number entry
+    answer: "35"
+  - type: jme
+    marks: 1
+    prompt: |
+      <em>The mathematical expression part type asks the student to write a mathematical expression as their answer. It's marked correct if it's equivalent to the expected answer.</em>
+      <br/><br/>
+      Differentiate the following function:
+      \[ 
+              f(x) = \simplify[all,!noLeadingMinus]{{c}x^2+{d}x+{f}} 
+      \]
+    answer: "{2*c}x+{d}"
+  - type: matrix
+    marks: 1
+    prompt: |
+      <p><em>The matrix entry part type asks the student to enter the elements of a matrix. It's marked correct if the student's matrix is equal to the expected matrix.</em></p>
+      <p>Enter a $3 \times 3$ identity matrix.</p>
+    correct_answer: id(3)
+    dimensions:
+      rows:
+        Resizable:
+          default: "3"
+          min: 1
+          max: none
+      columns:
+        Resizable:
+          default: "3"
+          min: 1
+          max: none
+    part_name: ""
+    steps_penalty: 0
+    show_correct_answer: true
+    show_feedback_icon: true
+    allow_fractions: true
+    max_absolute_deviation: 0.01
+    mark_partial_by_cells: false
+    display_correct_as_fraction: true
+    steps: []
+    custom_marking:
+      algorithm_notes: []
+      extend_base_marking_algorithm: true
+    adaptive_marking:
+      variable_replacement_strategy: original_first
+      penalty: 0
+      variable_replacements: []
+  - type: pattern_match
+    marks: 1
+    prompt: |
+      <p><em>The match text pattern part type asks the student to enter a short string of text. It's marked correct if it matches the pattern specified by the author.</em></p>
+      <p>Write "Numbas".</p>
+    case_sensitive: true
+    wrong_case_partial_credit: 50.0
+    pattern: Numbas
+    display_answer: Numbas
+    match_mode: exact
+  - type: choose_one
+    marks: 0
+    prompt: |
+      <p><em>The choose one from a list part asks the student to choose one item from a list of options. Each option can award a different number of marks.</em></p>
+      <p>Which fruit is biggest?</p>
+    answer_data:
+      - statement: Apple
+        feedback: ""
+        marks: 0
+      - statement: Strawberry
+        feedback: ""
+        marks: 0
+      - statement: Watermelon
+        feedback: ""
+        marks: "1"
+    shuffle_answers: true
+    show_cell_answer_state: true
+    display:
+      type: radio
+      columns: 0
+  - type: choose_multiple
+    marks: 0
+    prompt: |
+      <p><em>The choose several from a list part type asks the student to select one or more items from a list. Each option can award or subtract a different number of marks.</em></p>
+      <p>Tick every prime number in the list below.</p>
+    answer_data:
+      - statement: "13"
+        feedback: ""
+        marks: "1"
+      - statement: "7"
+        feedback: ""
+        marks: "1"
+      - statement: "2"
+        feedback: ""
+        marks: "1"
+      - statement: "6"
+        feedback: "$6 = 2 \\times 3$."
+        marks: "-1"
+      - statement: "9"
+        feedback: "$9 = 3 \\times 3$."
+        marks: "-1"
+      - statement: "51"
+        feedback: "$51 = 3 \\times 17$."
+        marks: "-1"
+    shuffle_answers: true
+    show_cell_answer_state: true
+    should_select_at_least: 0
+    should_select_at_most: 0
+    wrong_nb_answers_warning_type: none
+  - type: match_answers
+    marks: 0
+    prompt: |
+      <p><em>The match choices with answers part asks the student to match each of a list of 'choices' with a corresponding 'answer'. Each possible pair can award a different number of marks.</em></p>
+      <p>Match countries with their capital cities.</p>
+    answer_data:
+      type: item_based
+      answers:
+        - Paris
+        - Buenos Aires
+        - Beijing
+        - Brussels
+        - Melbourne
+      items:
+        - statement: France
+          answer_marks:
+            - marks: "1"
+              answer: Paris
+            - marks: 0
+              answer: Buenos Aires
+            - marks: 0
+              answer: Beijing
+            - marks: 0
+              answer: Brussels
+            - marks: 0
+              answer: Melbourne
+        - statement: Argentina
+          answer_marks:
+            - marks: 0
+              answer: Paris
+            - marks: "1"
+              answer: Buenos Aires
+            - marks: 0
+              answer: Beijing
+            - marks: 0
+              answer: Brussels
+            - marks: 0
+              answer: Melbourne
+        - statement: China
+          answer_marks:
+            - marks: 0
+              answer: Paris
+            - marks: 0
+              answer: Buenos Aires
+            - marks: "1"
+              answer: Beijing
+            - marks: 0
+              answer: Brussels
+            - marks: 0
+              answer: Melbourne
+    shuffle_answers: true
+    shuffle_items: true
+    show_cell_answer_state: true
+    should_select_at_least: 0
+    should_select_at_most: 0
+    display:
+      type: radio
+    layout:
+      type: all
+      expression: ""
+  - type: yes-no
+    marks: 1
+    prompt: |
+      <p><em>It's possible to create custom part types, or use one somebody else has published. A custom part type consists of settings for question authors, an input widget, and a marking algorithm. This part uses the "Yes/No" custom part type, which provides a simple means of asking if the student agrees with a statement.</em></p>
+      <p>Was the abacus invented before the mobile phone?</p>
+    part_name: Custom part type - Yes/no
+    settings:
+      correct_answer_expr: "true"
+    steps_penalty: 0
+    show_correct_answer: true
+    show_feedback_icon: true
+    steps: []
+    custom_marking:
+      algorithm_notes: []
+      extend_base_marking_algorithm: true
+    adaptive_marking:
+      variable_replacement_strategy: original_first
+      penalty: 0
+      variable_replacements: []
+  - type: gapfill
+    marks: 0
+    prompt: |
+      <p><em>The gap-fill part type allows you to include multiple input areas in one block of text. They're marked independently of each other, but submitted simultaneously, and all the feedback is shown together.</em></p>
+      <p>My dog is 3 years older than my cat, who is half the dog's age. What are their ages?</p>
+      <p>My dog's age: [[0]]</p>
+      <p>My cat's age: [[1]]</p>
+    sort_answers: false
+    gaps:
+      - type: number_entry
+        marks: 1
+        prompt: ""
+        part_name: "Dog's age"
+        answer: "6"
+      - type: number_entry
+        marks: 1
+        prompt: ""
+        part_name: "Cat's age"
+        steps_penalty: 0
+        answer: "3"
+variables:
+  c: random(-10..10 except 0)
+  a:
+    definition: "random(1 .. 10#1)"
+    description: ""
+    template_type: random_range
+    group: Ungrouped variables
+  d:
+    definition: "random(-10 .. 10#1)"
+    description: ""
+    template_type: random_range
+    group: Ungrouped variables
+  b:
+    definition: "random(1 .. 10#1)"
+    description: ""
+    template_type: random_range
+    group: Ungrouped variables
+  f:
+    definition: "random(-10 .. 10#1)"
+    description: ""
+    template_type: random_range
+    group: Ungrouped variables
+variables_test:
+  condition: a=4 and b=8
+  max_runs: 1000
+custom_part_types:
+  - yes-no
