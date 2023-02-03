@@ -1,13 +1,19 @@
 ---
 prompt: ""
-marks: 1
-part_name: none
+part_name: ""
 show_correct_answer: true
-show_feedback_icon: true
-steps: []
+show_feedback_Icon: true
+scripts: {}
+variable_replacements: []
+unit_tests: []
+show_preview: true
+check_variable_names: false
+single_letter_variables: true
+allow_unknown_functions: true
+implicit_function_composition: false
 steps_penalty: 0
-custom_marking: none
-adaptive_marking: none
+steps: []
+show_feedback_icon: true
 answer_simplification:
   simplify_basic: true
   simplify_unit_factor: true
@@ -32,6 +38,12 @@ answer_simplification:
   order_canonical: false
   use_times_dot: true
   expand_brackets: false
+max_length: none
+min_length: none
+must_have: none
+may_not_have: none
+must_match_pattern: none
+value_generators: []
 answer_display:
   broken_as_fractions: false
   mixed_fractions: false
@@ -40,15 +52,19 @@ answer_display:
   always_show_multiplication_sign: false
   use_dot_as_multiplication_sign: true
   matrices_without_parentheses: false
-show_preview: true
-check_variable_names: false
-single_letter_variables: false
-allow_unknown_functions: true
-implicit_function_composition: false
-must_match_pattern: none
-value_generators: none
-max_length: none
-min_length: none
-must_have: none
-may_not_have: none
-
+custom_marking:
+  algorithm_notes: []
+  extend_base_marking_algorithm: true
+adaptive_marking:
+  variable_replacement_strategy: original_first
+  penalty: 0
+  variable_replacements: []
+accuracy:
+  checking_type:
+    type: absolute_difference
+    max_difference: 0.001
+  max_failures: 1
+  checking_range:
+    - 0
+    - 1
+  points_to_check: 5

@@ -1,0 +1,56 @@
+---
+type_name: Yes/no
+description: "<p>The student is shown two radio choices: \"Yes\" and \"No\". One of them is correct.</p>"
+settings:
+  - input_type: mathematical_expression
+    name: correct_answer_expr
+    numbas_label: "Is the answer \"Yes\"?"
+    documentation_url: ""
+    numbas_hint: An expression which evaluates to <code>true</code> or <code>false</code>.
+    subvars: false
+    default_value: "true"
+    evaluate_enclosed_expressions: false
+can_be_gap: true
+can_be_step: true
+marking_notes:
+  - name: mark
+    expression: "if(studentanswer=correct_answer,\n  correct(),\n  incorrect()\n)"
+    description: "This is the main marking note. It should award credit and provide feedback based on the student's answer."
+  - name: interpreted_answer
+    expression: studentAnswer=0
+    description: "A value representing the student's answer to this part."
+  - name: correct_answer
+    expression: "if(eval(settings[\"correct_answer_expr\"]),0,1)"
+    description: ""
+marking_script: "mark:\nif(studentanswer=correct_answer,\n  correct(),\n  incorrect()\n)\n\ninterpreted_answer:\nstudentAnswer=0\n\ncorrect_answer:\nif(eval(settings[\"correct_answer_expr\"]),0,1)"
+help_url: ""
+published: true
+extensions:
+  chemistry: false
+  download_text_file: false
+  eukleides: false
+  geogebra: false
+  graphs: false
+  jsx_graph: false
+  linear_algebra: false
+  linear_codes: false
+  optimisation: false
+  permutations: false
+  polynomials: false
+  quantities: false
+  random_person: false
+  stats: false
+  written_number: false
+  sqlite: false
+  text: false
+input_widget:
+  type: radiogroup
+  hint:
+    value: ""
+    static: true
+  correct_answer: "if(eval(settings[\"correct_answer_expr\"]), 0, 1)"
+  choices:
+    value:
+      - "Yes"
+      - "No"
+    static: true
