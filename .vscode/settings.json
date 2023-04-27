@@ -1,4 +1,5 @@
 {
+    "explorer.excludeGitIgnore": true,
     "liveServer.settings.port": 5500,
     "liveServer.settings.root": "./_output/",
     "VsCodeTaskButtons.showCounter": true,
