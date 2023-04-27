@@ -1,0 +1,141 @@
+// Numbas version: exam_results_page_options
+{
+  "contributors": [
+    {
+      "name": "Eric Boeckx",
+      "profile_url": "https://numbas.mathcentre.ac.uk/accounts/profile/3901/"
+    }
+  ],
+  "custom_part_types": [],
+  "extensions": [],
+  "name": "Exponential function e^(ax)",
+  "navigation": {
+    "allowregen": true,
+    "preventleave": false,
+    "showfrontpage": false
+  },
+  "question_groups": [
+    {
+      "pickingStrategy": "all-ordered",
+      "questions": [
+        {
+          "advice": "",
+          "builtin_constants": {
+            "e": true,
+            "i": true,
+            "pi,π": true
+          },
+          "constants": [],
+          "contributors": [
+            {
+              "name": "Eric Boeckx",
+              "profile_url": "https://numbas.mathcentre.ac.uk/accounts/profile/3901/"
+            }
+          ],
+          "extensions": [],
+          "functions": {},
+          "maxMarks": 0,
+          "metadata": {
+            "description": "",
+            "licence": "None specified"
+          },
+          "name": "Exponential function e^(ax)",
+          "objectiveVisibility": "always",
+          "objectives": [],
+          "parts": [
+            {
+              "adaptiveMarkingPenalty": 0,
+              "customMarkingAlgorithm": "",
+              "customName": "",
+              "exploreObjective": null,
+              "extendBaseMarkingAlgorithm": true,
+              "gaps": [
+                {
+                  "adaptiveMarkingPenalty": 0,
+                  "allowUnknownFunctions": true,
+                  "answer": "{a}*e^({a}*x)",
+                  "caseSensitive": false,
+                  "checkVariableNames": false,
+                  "checkingAccuracy": 0.001,
+                  "checkingType": "absdiff",
+                  "customMarkingAlgorithm": "",
+                  "customName": "",
+                  "exploreObjective": null,
+                  "extendBaseMarkingAlgorithm": true,
+                  "failureRate": 1,
+                  "implicitFunctionComposition": false,
+                  "marks": 1,
+                  "nextParts": [],
+                  "scripts": {},
+                  "showCorrectAnswer": true,
+                  "showFeedbackIcon": true,
+                  "showPreview": true,
+                  "singleLetterVariables": false,
+                  "suggestGoingBack": false,
+                  "type": "jme",
+                  "unitTests": [],
+                  "useCustomName": false,
+                  "valuegenerators": [
+                    {
+                      "name": "x",
+                      "value": ""
+                    }
+                  ],
+                  "variableReplacementStrategy": "originalfirst",
+                  "variableReplacements": [],
+                  "vsetRange": [
+                    0,
+                    1
+                  ],
+                  "vsetRangePoints": 5
+                }
+              ],
+              "marks": 0,
+              "nextParts": [],
+              "prompt": "<p>$y'=$ [[0]]</p>",
+              "scripts": {},
+              "showCorrectAnswer": true,
+              "showFeedbackIcon": true,
+              "sortAnswers": false,
+              "suggestGoingBack": false,
+              "type": "gapfill",
+              "unitTests": [],
+              "useCustomName": false,
+              "variableReplacementStrategy": "originalfirst",
+              "variableReplacements": []
+            }
+          ],
+          "partsMode": "all",
+          "penalties": [],
+          "penaltyVisibility": "always",
+          "preamble": {
+            "css": "",
+            "js": ""
+          },
+          "rulesets": {},
+          "statement": "<p>The function with function equation $y=e^\\simplify{{a}x}$ has derivative function</p>",
+          "tags": [],
+          "ungrouped_variables": [
+            "a"
+          ],
+          "variable_groups": [],
+          "variables": {
+            "a": {
+              "can_override": false,
+              "definition": "random(-10 .. 10#1)",
+              "description": "",
+              "group": "Ungrouped variables",
+              "name": "a",
+              "templateType": "randrange"
+            }
+          },
+          "variablesTest": {
+            "condition": "a<>0",
+            "maxRuns": 100
+          }
+        }
+      ]
+    }
+  ],
+  "resources": []
+}
