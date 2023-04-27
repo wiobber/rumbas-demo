@@ -1,0 +1,11 @@
+---
+type: template
+template: afgeleiden/select-basis
+base_template:
+  template_key: base_template
+  default_value: templates/template-OPEN3
+function_basis_with_distractors: "[
+           [ 'sin(x)',  [ '-cos(x)', '-sin(x)', '1/sqrt(1-x^2)' ] ],
+           [ 'cos(x)',  [ 'sin(x)',  '-cos(x)', '1/sqrt(1-x^2)' ] ],
+           [ 'tan(x)',  [ '1/sin(x)^2', '-1/(cos(x)^2)', 'cot(x)'  ] ],
+                ]"

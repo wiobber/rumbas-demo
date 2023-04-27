@@ -1,0 +1,11 @@
+---
+type: template
+template: afgeleiden/select-basis
+base_template:
+  template_key: base_template
+  default_value: templates/template-OPEN3
+function_basis_with_distractors: "[
+           [ 'arcsin(x)',  [ '1/cos(x)', '-sin(x)', '-1/sqrt(1-x^2)', '1/sqrt(1+x^2)' ] ],
+           [ 'arccos(x)',  [ '-1/sin(x)',  '-cos(x)', '1/sqrt(1-x^2)', '1/sqrt(1+x^2)'] ],
+           [ 'arctan(x)',  [ '1/sin(x)^2', '-1/(cos(x)^2)', 'cot(x)', '1/(1-x^2)', '1/sqrt(1/x^2)'  ] ],
+                ]"

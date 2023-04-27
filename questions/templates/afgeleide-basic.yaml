@@ -1,0 +1,150 @@
+---
+type: template
+template: 
+    template_key: base_template
+    default_value: templates/template-MC
+prompt:
+    template_key: prompt
+    default_value: 
+      content:
+        nl: |
+             De afgeleide van de functie $\simplify[all,timesDot]{{functies[0]}}$ (naar de variabele $x$) is de functie 
+             <br/> {extra_info} <br/>
+        en: | 
+             The derivative of the function $\simplify[all,timesDot]{{functies[0]}}$ (as function of $x$) is the function
+             <br/> {extra_info} <br/>
+      placeholders:
+        extra_info:
+           template_key: extra_info
+           default_value: ""
+prompt_title:
+    template_key: prompt_title
+    default_value: 
+      content:
+        nl: "Bereken de afgeleide van volgende functies:"
+        en: "Calculate the derivative of following functions: "
+      placeholders: {}
+prompt_before:
+    template_key: prompt_before
+    default_value: 
+      content:
+        nl: "De afgeleide van  "
+        en: "The derivative of "
+      placeholders: {}
+prompt_after:
+    template_key: prompt_after
+    default_value: "is "
+columns:
+    template_key: columns
+    default_value: 1
+variables:
+  shuffle_function_list: 
+    template_key: "shuffle_function_list"
+    default_value: "true"
+  # contains list of [ first_function, list of [ second_function , [ list of distractors of second function ] ]
+  function_list: 
+    template_key: "function_list"
+    default_value: "[
+               [ ['sin(x)', 'cos(x)' ], [ [ 'sqrt(x)', [ 'sqrt(x)/2',  '1/sqrt(x)',   '1/2*x^(3/2)'  ] ],
+                                          [ 'x^{n}',   [ '{n}x^{n+1}', '{n-1}x^{n}' , 'x^{n-1}' ] ],
+                                        ] 
+               ],
+               [ ['sin(x)', 'cos(x)' ], [ 
+                                          [ 'ln(x)',   [ '1/ln(x)',   'x*ln(x)',      'x/ln(x)'  ] ],
+                                          [ '{a}^x',   [ '{a}^(x-1)', 'x*{a}^(x-1)', '{a}^x/ln({a})' ] ],
+                                        ] 
+               ],
+               [ function_power, [ 
+                                          [ 'sin(x)',  [ '-sin(x)', '1/sqrt(1-x^2)' ] ],
+                                          [ 'cos(x)',  [ '-cos(x)', '1/sqrt(1-x^2)' ] ],
+                                          [ 'tan(x)',  [ '1/sin(x)^2', '-1/(cos(x)^2)', 'cot(x)'  ] ],
+                                        ] 
+               ],
+               [ function_log, [ 
+                                          [ 'sin(x)',  [ '-sin(x)', '1/sqrt(1-x^2)' ] ],
+                                          [ 'cos(x)',  [ '-cos(x)', '1/sqrt(1-x^2)' ] ],
+                                          [ 'tan(x)',  [ '1/sin(x)^2', '-1/(cos(x)^2)', 'cot(x)'  ] ],
+                                        ] 
+               ],
+               [ function_exp, [ 
+                                          [ 'sin(x)',  [ '-sin(x)', '1/sqrt(1-x^2)' ] ],
+                                          [ 'cos(x)',  [ '-cos(x)', '1/sqrt(1-x^2)' ] ],
+                                          [ 'tan(x)',  [ '1/sin(x)^2', '-1/(cos(x)^2)', 'cot(x)'  ] ],
+                                        ] 
+               ]
+                ]"
+  debug_function_list: "[ 
+               [ function_gonio, function_basis_with_distractors ],
+               [ function_exp, function_basis_with_distractors ],
+               [ function_log, function_basis_with_distractors ],
+               [ function_power, function_basis_with_distractors ],
+               [ function_cyclo, function_basis_with_distractors ],
+                  ]"
+  # variables can be used to define function_list
+  function_gonio: "[ 'sin(x)', 'cos(x)', 'tan(x)', 'cot(x)' ]"
+  function_gonpower: "[ '(sin({a1}*x))^{n}', '(cos({a1}*x))^{n}', '(tan({a1}*x))^{n}', '(cot({a1}*x))^{n}' ]"
+  function_cyclo: "[ 'arcsin(x)', 'arccos(x)', 'arctan(x)' ]"
+  function_exp: "[ '{a}^x' ]"
+  function_log: "[  'ln(x)', 'log(x)' ]"
+  function_power: "[ 'x^{n}', '{a}x^{n}+{b}', '{a}x^{n}+{b}x + 1' ]"
+  function_basis_with_distractors: 
+    template_key: function_basis_with_distractors
+    default_value: "[
+          [ 'x^{n}',   [ '{n}x^{n+1}', '{n-1}x^{n}' , 'x^{n-1}' ] ],
+          [ 'sqrt(x)', [ 'sqrt(x)/2',  '1/sqrt(x)',   '1/2*x^(3/2)'  ] ],
+          [ 'sin(x)',  [ '-cos(x)', '-sin(x)', '1/sqrt(1-x^2)' ] ],
+          [ 'cos(x)',  [ 'sin(x)',  '-cos(x)', '1/sqrt(1-x^2)' ] ],
+          [ 'tan(x)',  [ '1/sin(x)^2', '-1/(cos(x)^2)', 'cot(x)'  ] ],
+          [ 'ln(x)',   [ '1/ln(x)',   'x*ln(x)',      'x/ln(x)'  ] ],
+          [ 'e^x',     [ 'e^(x-1)',   'x*e^(x-1)',    'ln(x)*e^x' ] ],
+          [ '{a}^x',   [ '{a}^(x-1)', 'x*{a}^(x-1)', '{a}^x/ln({a})' ] ],
+           ]"
+  list_in_random_order: if(shuffle_function_list,shuffle(function_list),function_list)
+  # JME hocus-pocus to create a list-of-random-products with random choice function_list
+  selected_cases: "map(flatten([ [ random(s[0]) ], random(s[1]) ]),s,list_in_random_order)"
+  #  - > [ left_function, [ right_function, [ list_of_distractors ] ] ]
+  opgavelijst: 
+    template_key: opgavelijst
+    default_value:  selected_cases
+  func_1:
+    template_key: func_1
+    default_value:  "map( expression(s[0]),s,opgavelijst)"
+  func_2:
+    template_key: func_2
+    default_value:  "map( expression(s[1]),s,opgavelijst)"
+  functies: 
+    template_key: functies
+    default_value: func_1  
+  answer:
+    template_key: answer
+    default_value: "map( diff(s,'x'),s, functies)"    # this is NOT in reduced form, unfortunately
+    #default_value: func_1    # this is NOT in reduced form, unfortunately
+  ans_a: answer                   # correct answers (in MC this name in briefly visible, and 'answer' would too obviously reaveal teh correct answer)
+  ans_b: "template:distractor_1"  # distractor1
+  ans_c: "template:distractor_2"  # distractor2
+  ans_d: "template:distractor_3"  # distractor3
+  a:
+    template_key: a
+    default_value: random(3 .. 7)
+  b:
+    template_key: b
+    default_value: random(-7 .. 7 except 0)
+  c: 
+    template_key: c
+    default_value: random(3 .. 7)
+  d:
+    template_key: d
+    default_value: random(3 .. 7)
+  a0: random(3 .. 7)
+  a1: random(3 .. 7)
+  a2: random(3 .. 7)
+  a3: random(3 .. 7)
+  a4: random(3 .. 7)
+  n:
+    template_key: n
+    default_value: random(3 .. 7)
+  m:
+    template_key: m
+    default_value: random(3 .. 7 except n)
+  # voor gebruik in statement/advice 
+advice: "template:advice"

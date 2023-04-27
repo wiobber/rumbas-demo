@@ -1,0 +1,39 @@
+---
+type: template
+template: templates/afgeleide-basic
+base_template:
+  template_key: base_template
+  default_value: templates/template-OPEN5
+columns:
+    template_key: columns
+    default_value: 4
+# opgavelijst is lijst met (lijsten!) [ basisfunctie, distractor1, distractor2, distractor3]  
+# Vb:
+#opgavelijst: "shuffle([
+#  [  'x^{n}', '{n}x^{n+1}', '{n-1}x^{n}', 'x^{n-1}'       ],
+#  [ 'sin(x)',    '-cos(x)',    '-sin(x)', '1/sqrt(1-x^2)' ],
+# ])" 
+# 
+# function_basis_with_distractors is list van [ func [ dist1, dist2, dist3 ] ] :
+# function_basis_with_distractors: "[
+#  [  'x^{n}',  [ '{n}x^{n+1}', '{n-1}x^{n}' , 'x^{n-1}'       ],
+#  [ 'sin(x)',  [    '-cos(x)', '-sin(x)'    , '1/sqrt(1-x^2)' ],
+#     ....
+# ]"
+#
+# n: random(2 .. 200)   # als je grotere exponenten wil in x^{n} ...
+opgavelijst:
+    template_key: opgavelijst
+    default_value: "map( flatten([ [ s[0] ], shuffle(s[1])]) ,s, if(shuffle_function_list,shuffle(function_basis_with_distractors),function_basis_with_distractors))"
+distractor_1:
+  template_key: distractor_1
+  default_value: "map(expression(s[1]),s,opgavelijst)"
+distractor_2:
+  template_key: distractor_2
+  default_value: "map(expression(s[2]),s,opgavelijst)"
+distractor_3:
+  template_key: distractor_3
+  default_value: "map(expression(s[3]),s,opgavelijst)"
+advice: 
+  template_key: advice
+  default_value: ""
