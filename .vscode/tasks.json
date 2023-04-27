@@ -107,6 +107,28 @@
         },
         {
             "type": "shell",
+            "label": "import",
+            "command": "rumbas",
+            "args": [
+                "import",
+                "-q",
+                "${relativeFile}"
+            ],
+            "problemMatcher": {
+                "owner": "rumbas",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": {
+                    "regexp": "^\\[\\d+-\\d+-\\d+\\]\\[\\d+:\\d+:\\d+\\]\\[[^\\]]*\\]\\[(ERROR)\\](.*)$",
+                    "severity": 1,
+                    "message": 2
+                }
+            }
+        },
+        {
+            "type": "shell",
             "label": "watch",
             "command": "rumbas",
             "args": [

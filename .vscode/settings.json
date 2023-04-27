@@ -11,13 +11,13 @@
             "description": "Create a new rumbas project in the current folder.",
             "tooltip": "Create a new rumbas project in the current folder."
         },
-        {
-            "label": "Update to new rumbas",
-            "alignment": "left",
-            "task": "update-repo",
-            "description": "Update your project to a newer version.",
-            "tooltip": "Update your project to a newer version.",
-        },
+        // {
+        //     "label": "Update to new rumbas",
+        //     "alignment": "left",
+        //     "task": "update-repo",
+        //     "description": "Update your project to a newer version.",
+        //     "tooltip": "Update your project to a newer version.",
+        // },
         {
             "label": "Check file",
             "alignment": "left",
@@ -46,6 +46,13 @@
         //     "tooltip": "Compile the current file with verbose logging.",
         //     "description": "Compile the current file with verbose logging."
         // },
+        {
+            "label": "Import file",
+            "alignment": "left",
+            "task": "import",
+            "description": "Import a Numbas exam into YAML.",
+            "tooltip": "Import a Numbas exam into YAML.",
+        },        
         {
             "label": "Watch rumbas project",
             "alignment": "left",
