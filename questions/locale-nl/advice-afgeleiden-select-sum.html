@@ -1,0 +1,25 @@
+       Er geldt $\simplify[all,timesDot]{Diff({function},x,1)} = \simplify[all,timesDot]{{answer}} $
+       <br/>
+       <br/>
+       Inderdaad, de afgeleide van de som is de som van de afgeleiden,
+               en de afgeleide van een veelvoud is het veelvoud van de afgeleide:
+                      \[
+                              \simplify{Diff(a*f(x)+b*g(x),x,1)=a*Diff(f(x),x,1) + b*Diff(g(x),x,1) }.
+                     \] 
+       <br/>
+       <br/>
+       <table>
+       <tr><td>
+       Hier is </td><td> $f(x)=\simplify[all,timesDot]{{s_first}}$, </td><td> en dus </td><td> $\simplify[all,timesDot]{Diff({s_first},x,1) = {diff({s_first},'x')}}$
+       </td></tr><tr><td>
+       en     </td><td>  $g(x)=\simplify[all,timesDot]{{s_secnd}}$, </td><td> en dus </td><td> $\simplify[all,timesDot]{Diff({s_secnd},x,1) = {diff({s_secnd},'x')}}$ 
+       </td></tr><tr><td>
+       en </td><td> $a=1$ en $b=\var{{s_factr}}$, 
+       </td></tr>
+       </table>
+       
+       Er geldt dus
+                      \[
+            \simplify[all,timesDot]{Diff({function},x,1)} = (\var{diff({s_first},'x')}) + (\var{{s_factr}}\cdot(\var{diff({s_secnd},'x')}))
+                                           = \simplify[all,timesDot]{{answer}}
+                      \]

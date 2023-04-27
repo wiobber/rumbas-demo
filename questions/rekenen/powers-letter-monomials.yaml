@@ -1,0 +1,32 @@
+---
+# Replaces exponents-letter-monomial-*
+type: template
+description: Powers of (products of) monomials x^..y^... with symbolic exponents
+template: rekenen/powers-letter-basic
+base_template:
+  template_key: base_template
+  default_value: templates/template-OPEN3
+format: 
+  template_key: format
+  default_value: "$x^ny^m$ (dus een product van machten van $x$ en van $y$)"   # Used in statement from powers-letter-basic!
+expr:
+  template_key: expr
+  default_value:  "[
+       '( x^({k}m+{a})*y^({l}n+{b}) )^{n}',
+       '( x^({k}m+{a})*y^({l}n+{b}) )     * ( x^({m}m+{c})*y^({n}n+{d}) )',
+       '( x^({k}m+{a})*y^({l}n+{b}) )^{f} * ( x^({m}m+{c})*y^({n}n+{d}) )^{g}',
+    ]"
+ansr:  # simplify does not sufficiently simplify the exponents with letters ...
+  template_key: ansr
+  default_value: "[
+       'x^({n}*{k}m+{a}*{n})     * y^({n}*{l}n+{n}*{b})',
+       'x^(    {k+m}m+{a+c}    ) * y^(    {l+n}n+{b+d}    )',
+       'x^({f*k+g*m}m+{f*a+g*c}) * y^({f*l+g*n}n+{f*b+g*d})',
+    ]"
+advr:  # simplify does provide the correct details with letters
+  template_key: advr
+  default_value: "[
+       'x^({n}*{k}m+{a}*{n})            * y^({n}*{l}n+{n}*{b})',
+       'x^(   ({k}m+{a})+   ({m}m+{c})) * y^(   ({l}n+{b})+   ({n}n+{d}))',
+       'x^({f}({k}m+{a})+{g}({m}m+{c})) * y^({f}({l}n+{b})+{g}({n}n+{d}))',
+    ]"

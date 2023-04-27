@@ -1,0 +1,50 @@
+---
+type: normal
+statement: 
+  template_key: statement
+  default_value: ""
+parts:
+  - type: choose_one
+    shuffle_answers: 
+      template_key: shuffle_answers
+      default_value: true
+    marks: 0
+    prompt:
+        content: |
+             {prompt_before} $\displaystyle\simplify[all,timesDot]{{functies[0]}}$ {prompt_after}
+             <br/> {extra_info} <br/>
+        placeholders:
+          prompt_before:
+            template_key: prompt_before
+            default_value: ""
+          prompt_after:
+            template_key: prompt_after
+            default_value: "="
+          extra_info:
+            template_key: extra_info
+            default_value: ""
+    answer_data:
+      - statement: "$\\simplify[all,timesDot]{{ans_a[0]}}$"
+        feedback: ""
+        marks: "1"
+      - statement: "$\\simplify[all,timesDot]{{ans_b[0]}}$"
+        feedback: ""
+        marks: "0"
+      - statement: "$\\simplify[all,timesDot]{{ans_c[0]}}$"
+        feedback: ""
+        marks: "0"
+      - statement: "$\\simplify[all,timesDot]{{ans_d[0]}}$"
+        feedback: ""
+        marks: "0"
+    display:
+      type: radio
+      columns: 
+        template_key: columns
+        default_value: 4
+variables: "template:variables"
+steps: 
+  template_key: steps
+  default_value: ""
+advice: 
+  template_key: advice
+  default_value: ""

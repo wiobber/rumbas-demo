@@ -1,0 +1,96 @@
+---
+type: normal
+statement: 
+  template_key: statement
+  default_value: ""
+parts:
+  - type: gapfill
+    marks: 0
+    prompt:
+        content: |
+          {prompt_title}
+          <table class="open">
+          <tr> <td>1) </td> <td>{prompt_before}</td> <td> $\displaystyle\simplify[{simplification_rules},timesDot]{{functies[0]}}$  </td> <td> {prompt_after} </td> <td style="text-align: left ">[[0]]  </td></tr>
+          <tr> <td>2) </td> <td>{prompt_before}</td> <td> $\displaystyle\simplify[{simplification_rules},timesDot]{{functies[1]}}$  </td> <td> {prompt_after} </td> <td style="text-align: left "> [[1]]  </td> </tr>
+          <tr> <td>3) </td> <td>{prompt_before}</td> <td> $\displaystyle\simplify[{simplification_rules},timesDot]{{functies[2]}}$  </td> <td> {prompt_after} </td> <td style="text-align: left "> [[2]]  </td> </tr>
+          <tr> <td>4) </td> <td>{prompt_before}</td> <td> $\displaystyle\simplify[{simplification_rules},timesDot]{{functies[3]}}$  </td> <td> {prompt_after} </td> <td style="text-align: left "> [[3]]  </td> </tr>
+          <tr> <td>5) </td> <td>{prompt_before}</td> <td> $\displaystyle\simplify[{simplification_rules},timesDot]{{functies[4]}}$  </td> <td> {prompt_after} </td> <td style="text-align: left "> [[4]]  </td> </tr>
+          </table>
+          <br/> {extra_info} <br/>
+        placeholders:
+          extra_info:
+             template_key: extra_info
+             default_value: ""
+          prompt_title:
+             template_key: prompt_title
+             default_value: ""
+          prompt_before:
+             template_key: prompt_before
+             default_value: ""
+          prompt_after:
+             template_key: prompt_after
+             default_value: "="
+          simplification_rules:
+             template_key: simplification_rules
+             default_value: "all"
+    gaps:
+      - type: number_entry
+        marks: 1
+        answer: "{ans_a[0]}"
+        fractions_must_be_reduced: false
+        display_correct_as_fraction: true
+        allow_fractions: true
+        hint_fraction:
+          template_key: hint_fraction
+          default_value: false
+      - type: number_entry
+        marks: 1
+        answer: "{ans_a[1]}"
+        fractions_must_be_reduced: false
+        display_correct_as_fraction: true
+        allow_fractions: true
+        hint_fraction:
+          template_key: hint_fraction
+          default_value: false
+      - type: number_entry
+        marks: 1
+        answer: "{ans_a[2]}"
+        fractions_must_be_reduced: false
+        display_correct_as_fraction: true
+        allow_fractions: true
+        hint_fraction:
+          template_key: hint_fraction
+          default_value: false
+      - type: number_entry
+        marks: 1
+        answer: "{ans_a[3]}"
+        fractions_must_be_reduced: false
+        display_correct_as_fraction: true
+        allow_fractions: true
+        hint_fraction:
+          template_key: hint_fraction
+          default_value: false
+      - type: number_entry
+        marks: 1
+        answer: "{ans_a[4]}"
+        fractions_must_be_reduced: false
+        display_correct_as_fraction: true
+        allow_fractions: true
+        hint_fraction:
+          template_key: hint_fraction
+          default_value: false
+
+variables: "template:variables"
+variables_test:
+  condition:
+    template_key: condition
+    default_value: ""
+  max_runs:
+    template_key: max_runs
+    default_value: 100
+steps: 
+  template_key: steps
+  default_value: ""
+advice: 
+  template_key: advice
+  default_value: ""

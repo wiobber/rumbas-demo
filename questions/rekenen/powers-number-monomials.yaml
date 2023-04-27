@@ -1,0 +1,53 @@
+---
+type: template
+description: Powers of (products of) monomials ax^ny^m
+template: rekenen/powers-number-basic
+base_template:
+  template_key: base_template
+  default_value: templates/template-OPEN5
+advice_formula: 
+  template_key: advice_formula
+  default_value: "file:advice-rekenen-formula-5.html"   
+format:
+  template_key: format
+  default_value: "$ax^ny^m$ (dus een product van een getal en machten van $x$ en van $y$)"   # Used in statement from powers-letter-basic!
+pattern_message:
+   template_key: pattern_message
+   default_value:  "Je antwoord lijkt niet in de vorm $ax^ny^m$ te zijn, met $n, m$ gehele getallen."
+
+expr:
+  template_key: expr
+  default_value:  "[
+       '( {a}x^{k}*y^{l} )^{f}                         ',
+       '( {a}x^{k}/y^{l} )^{f}                         ',
+       '( {a}x^{k}*y^{l} )     * ( {b}x^{m}*y^{n} )    ',
+       '( {a}x^{k}*y^{l} )^{f} * ( {b}x^{m}*y^{n} )^{g}',
+       '( {a}x^{k}*y^{l} )^{f} / ( {b}x^{m}*y^{n} )^{g}',
+    ]"
+ansr: 
+  template_key: ansr
+  default_value: "[
+       '({a})^{f}           * x^({f}*{k})         * y^({f}*{l})        ',
+       '({a})^{f}           * x^({f}*{k})         / y^({f}*{l})        ',
+       ' {a}*{b}            * x^({k}+{m})         * y^({l}+{n})        ',
+       '({a})^{f}*({b})^{g} * x^({f}*{k}+{g}*{m}) * y^({f}*{l}+{g}*{n})',
+       '({a})^{f}*({b})^{g} * x^({f}*{k}-{g}*{m}) * y^({f}*{l}-{g}*{n})',
+    ]"
+advr: 
+  template_key: ansr
+  default_value: "[
+       '{a^f}     * x^({f}*{k})         * y^({f*l})        ',
+       '{a^f}     * x^({f}*{k})         * y^({-f*l})        ',
+       '{a}*{b}   * x^({k}+{m})         * y^({l+n})        ',
+       '{a^f*b^g} * x^({f}*{k}+{g}*{m}) * y^({f*l+g*n})',
+       '{a^f*b^(-g)} * x^({f}*{k}-{g}*{m}) * y^({f*l-g*n})',
+    ]"  
+a:
+  template_key: a
+  default_value:  random(-3 .. 3 except 0..1)
+b:
+  template_key: b
+  default_value:  random(-3 .. 3 except [0,1,a])
+l:
+  template_key: l
+  default_value: random(2 .. 4 except k)

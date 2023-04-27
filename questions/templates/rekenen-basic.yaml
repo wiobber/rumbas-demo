@@ -1,0 +1,146 @@
+---
+description: Base template for calulations; uses expr/ansr/advr and template-XXX 
+type: template
+template:
+  template_key: base_template
+  default_value: templates/template-OPEN
+  #default_value: templates/template-OPEN-NUMBER
+simplification_rules: 
+  template_key: simplification_rules
+  default_value: "all"
+prompt_before:
+  template_key: prompt_before
+  default_value: ""
+statement:
+  template_key: statement
+  default_value:
+      content:
+        nl: "Bereken:"
+        en: "Calculate:"
+      placeholders: {}
+variables:
+  shuffle_list:
+    template_key: shuffle_list
+    default_value: "true"
+  a: 
+    template_key: a
+    default_value: random(3..7)
+  b:
+    template_key: b
+    default_value:  random(3..7 except a)
+  c:
+    template_key: c
+    default_value:  random(3..7 except a)
+  d:
+    template_key: d
+    default_value:  random(3..7 except a)
+  g:
+    template_key: g
+    default_value:  random(3..7 except a)
+  f:
+    template_key: f
+    default_value:  random(3..7 except a)
+  k:
+    template_key: k
+    default_value:  random(0..9)
+  l:
+    template_key: l
+    default_value:  random(0..9)
+  m:
+    template_key: m
+    default_value:  random(2,3,5)
+  n:
+    template_key: n
+    default_value:  random(2,3,5)
+  p:
+    template_key: p
+    default_value:  random(1..7 except a)
+  q:
+    template_key: q
+    default_value:  random(1..7 except p)
+  r:
+    template_key: r
+    default_value:  random(1..7 except p)
+  # the arrays  expr, ansr, advr contain task, answer (optional) and advisory (optional) AS STRINGS
+  # temporary arrays t_ansr and t_advr are used te turn ansr into expressions, and manipulate adrv if needed
+  # these arrays are optionally shuffled into x_expr, x_ansr, x_advr
+  # for use in template-XX the variables functies and ans_a are set
+  expr: 
+    template_key: expr
+    default_value: "[
+                     '({m} * ({a} + {b}* 0))/{m} - ({a+2}-1)*(-1)*{m}',
+                     'sqrt({a}^4*{b^2})',
+                     'root({-m^3},3)',
+                     '{m^3}^(1/3)',
+                     '({b}^{m+1})^(2/{m+1})',
+                      ]"
+  ansr: 
+    template_key: ansr
+    default_value: []
+  advr: 
+    template_key: advr
+    default_value: []
+  # if no answer given, assume an eval of the expr is automatically the correct answer
+  # Optionally, with t_answr you can speciffy the final correct answer
+  # TODO: quid 'simplify' vs 'eval' ...???
+  t_ansr: 
+    template_key: t_ansr
+    default_value: map(expression(s),s, if(len(ansr) = 0,expr,ansr))
+    xdefault_value: map(simplify(expression(s),'all'),s, if(len(ansr) = 0,expr,ansr))
+  # if advr is too short; increase it with '', so that x_advr[n] exists for each x_expr[n] ...
+  t_advr: if(len(advr)  < len(expr), flatten( [ advr, repeat('',len(expr)-len(advr)) ] ),advr)
+  x_selection: if(shuffle_list, shuffle(selection), selection)
+  x_expr: reorder(expr,x_selection)
+  x_ansr: reorder(t_ansr,x_selection)
+  x_advr: reorder(t_advr,x_selection)
+  selection: 
+    template_key: selection
+    default_value: 0 .. len(expr)-1  
+  #
+  # Set variables/format for templates/template-OPEN etc
+  #
+  functies:   # used in template-XX 
+    template_key: functies
+    default_value: map(expression(s),s,x_expr)
+  ans_a:    # used in template-XX 
+    template_key: ans_a
+    default_value: if(opt_a[0], map(expression(s),s,reorder(opt_a,x_selection)),x_ansr) # geknoei
+  ans_b:    # used in template-XX 
+    template_key: ans_b
+    default_value: map(expression(s),s,reorder(opt_b,x_selection))
+  ans_c:    # used in template-XX 
+    template_key: ans_c
+    default_value: map(expression(s),s,reorder(opt_c,x_selection))
+  ans_d:    # used in template-XX 
+    template_key: ans_d
+    default_value: map(expression(s),s,reorder(opt_d,x_selection))
+  opt_a:    # used in template-XX 
+    template_key: opt_a
+    default_value: map('',s,x_expr)
+  opt_b:    # used in template-XX 
+    template_key: opt_b
+    default_value: map('',s,x_expr)
+  opt_c:    # used in template-XX 
+    template_key: opt_c
+    default_value: map('',s,x_expr)
+  opt_d:    # used in template-XX 
+    template_key: opt_d
+    default_value: map('',s,x_expr)
+advice:
+  content:
+    template_key: advice_content
+    default_value: "file:advice-formula-see-website.html"
+  placeholders:
+    cursus_website:
+      template_key: cursus_website
+      default_value: 
+         content:
+            nl: "https://set.kuleuven.be/voorkennis/zomercursus/zomercursusZ"
+            en: "https://set.kuleuven.be/voorkennis/zc-en"
+         placeholders: {}
+    cursus_url:
+      template_key: cursus_url
+      default_value: "/rekenen/haakjes" # should be intro !!!
+    advice_formula:
+      template_key: advice_formula
+      default_value: ""

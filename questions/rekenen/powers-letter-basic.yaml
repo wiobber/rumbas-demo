@@ -1,0 +1,139 @@
+---
+# Generic template for powers of powers/products/monomials; presumably not of sums
+# Replaces exponents-letter-monomial-*
+# -> range of variables to be verified
+type: template
+description: Powers of (products of) monomials with symbolic exponents
+template: templates/rekenen-basic
+base_template:
+  template_key: base_template
+  default_value: templates/template-OPEN3
+#
+# Setup:
+#
+prompt_before:
+  template_key: prompt_before
+  default_value: ""
+statement:
+    content: "file:statement-rewrite-with-format.html"
+    placeholders:
+      format:
+        template_key: format
+        default_value: "$x^n$"
+      extra_instructions:
+        template_key: extra_instructions
+        default_value: "file:extra-instructions-powers.html"
+shuffle_list: 
+  template_key: shuffle_list
+  default_value: "false"
+# PAS OP: om technische redenen worden deze simplification_rules hieronder herhaald in het advice ...!
+simplification_rules: 
+  template_key: simplification_rules
+  default_value: "timesDot, alwaysTimes,basic,unitpower,zeropower,fractionnumbers,unitfactor"
+#
+# Opgaven:
+#
+expr:
+  template_key: expr
+  default_value:  "[
+       '( x^({k}m+{a}))^{f}',
+       '( x^({k}m+{a}))    *( x^({m}m+{c}) )',
+       '( x^({k}m+{a}))^{f}*( x^({m}m+{c}) )^{g}',
+    ]"
+ansr:  # simplify does not simplify the exponents with letters ...
+  template_key: ansr
+  default_value: "[
+       'x^({f}*{k}m+{a}*{f})    ',
+       'x^({k+m}m+{a+c})        ',
+       'x^({f*k+g*m}m+{f*a+g*c})',
+    ]"
+advr:  
+  template_key: advr
+  default_value: "[
+       'x^( {f}*{k}m + {a}*{f} )          ',
+       'x^(    ({k}m+{a}) +    ({m})m+{c})',
+       'x^( {f}({k}m+{a}) + {g}({m}m+{c}))',
+    ]"
+#  12/2022: patterns are by POSITION, and do NOT follow the shuffle-of-expr
+pattern_0: "(`+-$n)`? * (x`|x^?)`? * (y`|y^?)`?"      #  ax^ny^m with any exponent
+pattern_1: "(`+-$n)`? * (x`|x^?)`? * (y`|y^?)`?"      #  ax^ny^m with any exponent, to broad, but reusable for more general expr's
+pattern_2: "(`+-$n)`? * (x`|x^?)`? * (y`|y^?)`?"      #  ax^ny^m with any exponent
+pattern_3: "(`+-$n)`? * (x`|x^?)`? * (y`|y^?)`?"      #  ax^ny^m with any exponent
+pattern_4: "(`+-$n)`? * (x`|x^?)`? * (y`|y^?)`?"      #  ax^ny^m with any exponent
+#pattern_1: "(`+-$n)`? * (x`|x^`+-$n)`? * (y`|y^`+-$n)`?"      #  ax^ny^m with numeric exponent
+#pattern_2: "(`+-$n)`? * (x`|x^?    )`? * (y`|y^?    )`?"      # idem with arbitrary exponent
+#pattern_3: "((`+-$n `| `+-$n^?)`? * $z)`?  * (x`|x^?   )`? * (y`|y^?    )`?" # testje idem with powers-of-numbers allowed (2^a3^bx^ny^m) DOES NOT WORK
+# TODO: templaterize message; use templae {format}; english version.
+pattern_message_0:
+   template_key: pattern_message
+   default_value:  "Je antwoord lijkt niet in de vorm $x^n$ te zijn, met $n$ een geheel getal."
+pattern_message_1:
+   template_key: pattern_message
+   default_value:  "Je antwoord lijkt niet in de vorm $x^n$ te zijn, met $n$ een geheel getal."
+pattern_message_2:
+   template_key: pattern_message
+   default_value:  "Je antwoord lijkt niet in de vorm $x^n$ te zijn, met $n$ een geheel getal."
+pattern_message_3:
+   template_key: pattern_message
+   default_value:  "Je antwoord lijkt niet in de vorm $x^n$ te zijn, met $n$ een geheel getal."
+pattern_message_4:
+   template_key: pattern_message
+   default_value:  "Je antwoord lijkt niet in de vorm $x^n$ te zijn, met $n$ een geheel getal."
+#
+# Variables (presumably reasonable default defauls for all of 'powers-' ...)
+#
+a:
+  template_key: a
+  default_value:  random(-3 .. 3 except 0..1)
+b:
+  template_key: b
+  default_value:  random(-3 .. 3 except [0,1,a])
+k:
+  template_key: k
+  default_value: random(2 .. 9)
+l:
+  template_key: l
+  default_value: random(2 .. 4 except k)
+m:
+  template_key: m
+  default_value: random(2 .. 9)
+n:
+  template_key: n
+  default_value: random(2 .. 4 except m)
+f:
+  template_key: f
+  default_value: random(2 .. 3)
+g:
+  template_key: g
+  default_value:  random(2 .. 4 except f)
+#
+# Advice
+#
+cursus_url:
+  template_key: cursus_url
+  default_value: "/rekenen/machten"
+# For use with OPEN ...
+# Hacky: more elegant solution would be nice ...
+# The actual advices are in files, to make it possible to dynamically select  1-3-5 versions.
+# (This seems to be impossible with just template-vars; and using files seems slightly inconvenient/complicated for this use-case )
+# Even more inconventient could be that these advice-files are language independent, and therefor symbolic links are used ;)
+#
+# The files advice-rekenen-formula-x.html (x=1/3/5) contain semi-smart advice that use adhoc-simplify-rules to generically generate reasonable advices...
+#
+advice_formula: 
+  content: 
+    template_key: advice_formula
+    default_value: "file:advice-rekenen-formula-3.html"
+    #default_value: "file:advice-rekenen-formula-1.html"
+    #default_value: "file:advice-rekenen-formula-5.html"
+  placeholders:
+      simplification_rules:
+        template_key: simplification_rules
+        default_value: "timesDot, alwaysTimes,basic,unitpower,zeropower,fractionnumbers,unitfactor"
+      simplification_rules_advr:
+        template_key: simplification_rules_advr
+        default_value: "timesDot,basic,unitpower,zeropower,fractionnumbers,unitfactor"
+      simplification_rules_ansr:
+        template_key: simplification_rules_ansr
+        default_value: "timesDot, all"
+

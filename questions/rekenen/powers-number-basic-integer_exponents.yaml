@@ -1,0 +1,37 @@
+---
+type: template
+description: Expressions from powers-number-basic, but with possibly negative exponents
+template: rekenen/powers-number-basic
+base_template:
+  template_key: base_template
+  default_value: templates/template-OPEN5
+advice_formula: 
+  template_key: advice_formula
+  default_value: "file:advice-rekenen-formula-5.html" 
+format: 
+  template_key: format
+  default_value: "$a x^n$ (dus een constante maal een  -eventueel negatieve- macht van $x$)"   # presumably used in statement from powers-letter-basic!
+simplification_rules:
+  template_key: simplification_rules
+  default_value: "timesDot,alwaystimes,basic,unitpower,zeropower,fractionnumbers,unitfactor,zerofactor"
+shuffle_list:
+  template_key: shuffle_list
+  default_value: "false"    # pseudo-didactic setting of increasing difficulty, with OPEN; change if using OPEN
+a:
+  template_key: a
+  default_value:  random(-3 .. 3 except 0..1)
+k:
+  template_key: k
+  default_value: random(-9 .. 9 except 0..1)
+m:
+  template_key: m
+  default_value: random(-9 .. 9 except 0..1)
+n:
+  template_key: n
+  default_value: random(-4 .. 4 except [0, 1, m] )
+f:
+  template_key: f
+  default_value: random(2 .. 5 except 0..1)
+g:
+  template_key: g
+  default_value:  random(-3 .. 4 except [0,1,f] )

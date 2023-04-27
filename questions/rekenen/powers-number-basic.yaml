@@ -1,0 +1,50 @@
+---
+type: template
+description: Powers of monomials
+template: rekenen/powers-letter-basic
+base_template:
+  template_key: base_template
+  default_value: templates/template-OPEN5
+advice_formula: 
+  template_key: advice_formula
+  default_value: "file:advice-rekenen-formula-5.html" 
+format: 
+  template_key: format
+  default_value: "$a x^n$ (dus een constante maal een macht, bijvoorbeeld $2x^3$ of $2 \\ast x^3$)"   # presumably used in statement from powers-letter-basic!
+simplification_rules:
+  template_key: simplification_rules
+  default_value: "timesDot,alwaystimes,basic,unitpower,zeropower,fractionnumbers,unitfactor,zerofactor"
+shuffle_list:
+  template_key: shuffle_list
+  default_value: "false"    # pseudo-didactic setting of increasing difficulty, with OPEN; change if using OPEN
+#
+# Use defaults for variables from powers-letter-basic or rekenen-basic, and hope for the best
+# 12/2022: they are all assumed positive, and overwritten with negative ones in powers-numbers-basic-integer_exponents
+#
+expr:
+  template_key: expr
+  default_value:  "[
+       '( {a}x^{k} )^{f}                ',
+       '( {a}x^{k} )     * ( x^{m} )    ',
+       '( {a}x^{k} )     * (x^{m}*x^{n})',
+       '( {a}x^{k} )^{f} * ( x^{m} )^{g}',
+       '( {a}x^{k} )^{f} / ( x^{m} )^{g}',       
+    ]"
+ansr: 
+  template_key: ansr
+  default_value: "[
+       ' {a^f} * x^( {k*f}     ) ',
+       ' {a}   * x^( {k+m}     ) ',
+       ' {a}   * x^( {k+m+n}   ) ',
+       ' {a^f} * x^( {k*f+m*g} ) ',
+       ' {a^f} * x^( {k*f-m*g} ) ',
+    ]"
+advr: 
+  template_key: advr
+  default_value: "[
+       '({a})^{f} * x^( {k}*{f} )           ',
+       ' {a}      * x^( {k}+{m} )           ',
+       ' {a}      * x^( {k}+{m} +{n} )      ',
+       '({a})^{f} * x^(  {k}*{f} + {m}*{g}  )',
+       '({a})^{f} * x^( ({k}*{f})-({m}*{g}) )',
+    ]"

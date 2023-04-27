@@ -1,0 +1,28 @@
+---
+type: template
+description: Variant on powers-number-basic with possibly negative exponents.
+template: rekenen/powers-number-monomials
+format: 
+  template_key: format
+  default_value: "$ax^ny^m$ (dus een product van een getal en -eventueel negatieve- machten van $x$ en van $y$)" 
+a:
+  template_key: a
+  default_value:  random(-3 .. 3 except 0..1)
+k:
+  template_key: k
+  default_value: random(-9 .. 9 except 0..1)
+l:
+  template_key: l
+  default_value: random(-4 .. 4 except [0, 1, k] )
+m:
+  template_key: m
+  default_value: random(-9 .. 9 except 0..1)
+n:
+  template_key: n
+  default_value: random(-4 .. 4 except [0, 1, m] )
+f:
+  template_key: f
+  default_value: random(2 .. 5 except 0..1)
+g:
+  template_key: g
+  default_value:  random(-3 .. 4 except [0,1,f] )
