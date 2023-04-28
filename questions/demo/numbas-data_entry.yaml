@@ -1,0 +1,233 @@
+---
+type: normal
+statement:
+  content: |
+    <big><strong> Hoe antwoorden ingeven in NUMBAS.</strong></big>
+    <br/>
+    <br/>
+    Meestal is dat erg intuïtief, en soms wordt je antwoord al getoond <em>terwijl</em> je het intikt.  Let vooral op voor het volgende:
+    <ul class="info">
+    <li> gebruik een <strong>punt</strong> in plaats van een komma, dus $0.5$ in plaats van $0,5$. </li>
+    <li> soms kan je enkel getallen ingeven, soms kunnen ook formules zoals <tt>sqrt(2)</tt> voor $\sqrt{2}$ of <tt>y=2x+1</tt> voor een vergelijking van een rechte.</li> 
+    <li> meestal kan je een <strong>product</strong> zowel ingeven als <tt>2*x</tt> of <tt>2x</tt>, en <tt>x*y</tt> of <tt>xy</tt>. Maar met haakjes en letters is de * soms verplicht: <tt>a*(b+c)</tt>, want <tt>a(b+c)</tt> kan Numbas begrijpen als de functie $a$ geëvalueerd in de waarde $b+c$.</li>
+    <li> regelmatig zijn bij het ingeven <strong>haakjes</strong> nodig, terwijl die in de uiteindelijke formule toch niet voorkomen: <br/>
+         $\frac{1}{x+2}$ is <tt>1/(x+2)</tt> want <tt>1/x+2</tt> wordt geïnterpreteerd als $1/x + 2 = \frac{1}{x} + 2$
+         </li>
+    <li> de macht $x^2$ geef je in met de toets ^ als <tt>x^2</tt>, de vierkantswortel $\sqrt{2}$  als <tt>sqrt(2)</tt>, $\infty$ als <tt>infinity</tt>.</li>
+    </ul>
+    Als je ergens twijfelt, vind je hier voorbeelden, en kan je oefenen:
+  placeholders: {}
+parts:
+  - type: gapfill
+    marks: 0
+    prompt:
+      content: |
+        <strong> Eenvoudige uitdrukkingen:</strong>
+        <table border="yes">
+        <tbody>
+        <tr>
+        <td></td>
+        <td>Voorbeeld</td>
+        <td>Via</td>
+        <td style="min-width:200px">Probeer het hier</td>
+        <td>Opmerking</td>
+        </tr>
+        <tr>
+        <td> een kommagetal</td>
+        <td> $3,14$</td>
+        <td class="tt"> 3.14 </td>
+        <td> [[0]]</td>
+        <td>Gebruik <strong> een punt in plaats van een komma</strong> </td>
+        </tr>
+        <tr>
+        <td> een breuk</td>
+        <td> $\dfrac{1}{\var{a}}$</td>
+        <td  class="tt"> 1/{a}</td>
+        <td>[[1]]</td>
+        <td>Gebruik een <strong>schuine streep</strong>. </td>
+        </tr>
+        <tr>
+        <td> een macht</td>
+        <td> $x^\var{n}$</td>
+        <td  class="tt"> x^{n} </td>
+        <td> [[2]]</td>
+        <td>Het symbool ^ staat naast de letter P 
+        <br/> <small> (en het symbool verschijnt pas als je het volgende karakter tikt!)</small>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+      placeholders: {}
+    gaps:
+      - type: number_entry
+        answer: "3.14"
+        marks: 1
+        use_custom_name: true
+        custom_name: Kommagetal
+        display_correct_as_fraction: false
+        allow_fractions: false
+      - type: number_entry
+        answer: 1/a
+        marks: 1
+        prompt: ""
+        display_correct_as_fraction: true
+        allow_fractions: true
+        fractions_must_be_reduced: true
+        partial_credit_if_fraction_not_reduced: "0"
+        hint_fraction: false
+        use_custom_name: true
+        custom_name: Breuk
+      - type: jme
+        answer: "x^{n}"
+        marks: 1
+  - type: gapfill
+    marks: 0
+    prompt:
+      content: |
+        <strong> Pas op voor volgende valkuilen:</strong>
+        <table border="yes">
+        <tbody>
+        <tr>
+        <td></td>
+        <td>Voorbeeld</td>
+        <td>Via</td>
+        <td style="min-width:200px">Probeer het hier</td>
+        <td>Opmerking</td>
+        </tr>
+        <tr>
+        <td> een product tussen letters</td>
+        <td> $ax$</td>
+        <td class="tt"> a*x  </td>
+        <td> [[0]]</td>
+        <td> de * voor de vermenigvuldiging is hier optioneel
+        <br/> <small> (in uitzonderlijke gevallen zou NUMBAS kunnen denken dat je één variabele 'ax' bedoelt, en dan is de * toch verplicht)</small>
+        </td>
+        </tr>
+        <tr>
+        <td> een product met haakjes</td>
+        <td> $a(x+\var{n})$</td>
+        <td class="tt"> a*(x+{n})  </td>
+        <td> [[1]]</td>
+        <td>Een * voor de vermenigvuldiging is hier <strong>verplicht</strong>
+        <br/> <small> (want anders denkt NUMBAS dat je de functie $a$ wil evalueren voor de waarde $x+\var{n}$)</small>
+        </td>
+        </tr>
+        <tr>
+        <td> een uitdrukking in de noemer</td>
+        <td> $\dfrac{1}{\var{n}x}$</td>
+        <td  class="tt">1/({n}x) </td>
+        <td>[[2]]</td>
+        <td>Gebruik <strong>haakjes</strong>.
+        <br/> <small> (want anders krijg je $(1/\var{n})x = \dfrac{1}{\var{n}}\cdot x = \dfrac{x}{\var{n}}$)</small>
+        <br/> <small> (een * mag hier, maar moet niet: <span class="tt"> 1/({n}*x)</span>)</small>
+        </td>
+        </tr>
+        <tr>
+        <td> een uitdrukking in een exponent</td>
+        <td> $x^{\var{a}n}$</td>
+        <td  class="tt"> x^({a}n) </td>
+        <td> [[3]]</td>
+        <td>Gebruik <strong>haakjes</strong>.
+        <br/> <small> (want anders krijg je $(x^{\var{a}})n = nx^{\var{a}}$)</small>
+        </td>
+        </tr>
+        <tr>
+        <td> </td>
+        <td> $x^{\var{a}+n}$</td>
+        <td  class="tt"> x^({a}+n) </td>
+        <td> [[4]]</td>
+        <td>Gebruik <strong>haakjes</strong>.
+        <br/> <small> (want anders krijg je $x^{\var{a}}+n$ )</small>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+      placeholders: {}
+    gaps:
+      - type: jme
+        answer: a*x
+        marks: 1
+        use_custom_name: true
+        custom_name: Product letters
+      - type: jme
+        answer: "a*(x+{n})"
+        marks: 1
+        use_custom_name: true
+        custom_name: Product haakjes
+      - type: jme
+        answer: "1/({n}x)"
+        marks: 1
+        use_custom_name: true
+        custom_name: Breuk
+      - type: jme
+        answer: "x^({a}n)"
+        marks: 1
+        use_custom_name: true
+        custom_name: Exponent product
+      - type: jme
+        answer: "x^({a}+n)"
+        marks: 1
+        use_custom_name: true
+        custom_name: Exponent som
+  - type: gapfill
+    marks: 0
+    prompt:
+      content: |
+        <strong> Speciale uitdukkingen:</strong>
+        <table border="yes">
+        <tbody>
+        <tr>
+        <td></td>
+        <td>Voorbeeld</td>
+        <td>Via</td>
+        <td style="min-width:200px">Probeer het hier</td>
+        <td>Opmerking</td>
+        </tr>
+        <tr>
+        <td> oneindig </td>
+        <td> $\infty$</td>
+        <td  class="tt"> infty </td>
+        <td> [[0]]</td>
+        <td style="font-family:monospace"> of  infinity </td>
+        </tr>
+        <tr>
+        <td> pi </td>
+        <td> $\pi$</td>
+        <td  class="tt"> pi </td>
+        <td> [[1]]</td>
+        <td style="font-family:monospace"></td>
+        </tr>
+        <tr>
+        <td> een vierkantswortel </td>
+        <td> $\sqrt{\var{a}}$</td>
+        <td  class="tt"> sqrt({a}) </td>
+        <td> [[2]]</td>
+        <td style="font-family:monospace"> of sqr({a})  </td>
+        </tr>        
+        <tr>
+        <td> een hogere wortel </td>
+        <td> $\sqrt[3]{\var{a}}$</td>
+        <td  class="tt"> root({a},3) </td>
+        <td> [[3]]</td>
+        <td> </td>
+        </tr>
+        </tbody>
+        </table>
+      placeholders: {}
+    gaps:
+      - type: jme
+        answer: +infinity
+        marks: 1
+      - type: jme
+        answer: pi
+        marks: 1
+      - type: jme
+        answer: "sqrt({a})"
+        marks: 1
+      - type: jme
+        answer: "root({a},3)"
+        marks: 1
+variables:
+  a: random (2 .. 7 except 4)
+  n: random (2 .. 8 except a)
+advice: ""

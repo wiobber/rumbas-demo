@@ -1,0 +1,133 @@
+---
+type: normal
+statement:
+  content: |
+    <big><strong>Leren werken met NUMBAS.</strong></big>
+    <br/>
+    <br/>
+    NUMBAS dient om wiskunde oefeningen te maken, en de belangrijkste functionaliteit zou onmiddellijk duidelijk moeten zijn:
+    <ul>
+    <li><strong>Verzend antwoord</strong> dient het antwoord op een deelvraag in (maar je kan dat antwoord altijd later nog wijzigen door het opnieuw te verzenden). </li>
+    <li><strong>Verzend alles</strong> dient alles tegelijk in (maar je kan je antwoorden altijd opnieuw verzenden). </li>
+    <li><strong>Probeer een soortgelijke vraag opnieuw</strong> geeft in vele gevallen een gelijkaardige vraag met andere getallen, soms ook met een andere soort opgave. 
+        Deze optie is in 'examenmodus' niet beschikbaar.</li>
+    <li><strong>Laat zien</strong> toont de oplossing, en in vele gevallen ook een volledige uitwerking. Het is dan niet meer mogelijk het antwoord te verzenden.
+    Ook deze optie is in 'examenmodus' niet beschikbaar.</li>
+    <li><strong>Pauze</strong> in de linkerkolom pauzeert de huidige sessie. Volgende keer dat je de toets opstart kun je verder gaan met deze sessie.</li>
+    <li><strong>Klaar</strong> in de linkerkolom beëindigt de oefenreeks. Je krijgt een totaal, en kan in 'examenmodus' meestal de juiste antwoorden en uitleg zien voor elke vraag. 
+        Je kan deze ingevulde oefenreeks later nog bekijken, en in de meeste gevallen kan je dezelfde oefenreeks ook volledig opnieuw maken, zo dikwijls als je wenst.</li>
+    </ul>
+    <strong>Beantwoord volgende vragen</strong>, en experimenteer kort met 'Verzend', 'Laat zien' en 'Probeer soortgelijke vraag opnieuw'.
+  placeholders: {}
+parts:
+  - type: choose_one
+    marks: 0
+    prompt:
+      content: |
+        Is de uitspraak 'Een breuk is altijd positief' waar of onwaar?
+        <br/>
+      placeholders: {}
+    answer_data:
+      - statement:
+          content:
+            nl: Waar
+            en: "True"
+          placeholders: {}
+        feedback: "Jammer, een breuk kan ook negatief zijn, bijvoorbeeld $-\\frac{1}{2}$."
+        marks: 0
+      - statement:
+          content:
+            nl: Onwaar
+            en: "False"
+          placeholders: {}
+        feedback: "Inderdaad, want een breuk kan ook negatief zijn, bijvoorbeeld $-\\frac{1}{2}$."
+        marks: 1
+    display:
+      type: dropdown
+      columns: 2
+    shuffle_answers: false
+  - type: gapfill
+    marks: 0
+    prompt:
+      content: |
+        $\var{a1} + \var{a2} = $ [[0]]
+      placeholders: {}
+    gaps:
+      - type: number_entry
+        answer: "10"
+        marks: 1
+        use_custom_name: true
+        custom_name: a)
+variables:
+  a1: random (2 .. 8)
+  a2: 10-a1
+advice: |
+  Na  'Laat zien' krijg je bij de meeste vragen wat extra uitleg, die al dan niet nuttig kan zijn voor jou.
+  <br/>
+  <br/>
+  Voor vraag b) geldt dat {a1} + {a2} = {a1+a2}, zoals je vroeger al hebt geleerd.
+  <br/>
+  <br/>
+  Uitvoerig onderzoek leert dat sommige studenten wel eens heel snel naar de oplossing gaan kijken, 
+  en dan tevreden concluderen dat die inderdaad klopt, en dat ze dat ook hadden kunnen vinden.
+  <br/>
+  Wees echter gewaarschuwd dat er een groot verschil is tussen een oplossing begrijpen, en er zelf één vinden. 
+  In het echte leven komt het er meestal op aan oplossingen te vinden, en dat is dus best waar je je op voorbereid. 
+  Ook voor examens is het meestal nodig de oplossing zelf te vinden.
+  <br/>
+  Dit neemt niet weg dat het aandachtig bestuderen van een oplossing erg leerzaam is 
+  op voorwaarde dat je eerst minstens een eerlijke poging hebt gedaan om de oplossing zelf te vinden.
+  <br/>
+  <br/>
+  
+  <strong>Enkel als iets toch onduidelijk blijft, is het nuttig nu de verdere uitleg te lezen. 
+   Anders ga je naar de volgende vraag.
+   </strong>
+    <br/>
+    <br/>
+    
+    We kunnen NUMBAS instellen zodat je begrippen en technieken kan inoefenen,
+    maar ook zodat je zelf je kennis kan evalueren.
+    Naargelang het geval gedraagt NUMBAS zich enigszins anders,
+    en wordt er bijvoorbeeld al dan niet onmiddellijk feedback gegeven op je antwoord.
+    <br/>
+    <ul class="info">
+    <li>
+    Als het venster waarin je deze oefening bekijkt eerder klein is, zie je enkel deze oefening met bovenaan twee pijltjes om naar de vorige resp. volgende oefening te gaan. Je kan ook een menu openklappen.
+    </li>
+    <li>
+    Als het venster waarin je deze oefening bekijkt voldoende groot is, is er links een lijst van alle vragen, met onderaan een rode knop 'Klaar' waarmee je deze reeks van oefeningen kan beëindigen.
+    Je resultaten worden dan opgeslagen, je kan ze later raadplegen. Je kan het venster of tabblad sluiten, en terugkeren naar Toledo.
+    </li>
+    </ul>
+    <br/>
+    Onderaan elke oefening staan meestal drie knoppen (maar bij zelfevaluatie soms enkel de eerste):
+    <ul class="info">
+    <li>
+    <strong>Verzend</strong>: laat je antwoord door de computer controleren. 
+    Je kan altijd meerdere keren je antwoord 'verzenden', enkel het laatste antwoord telt mee in je totaal aantal punten. 
+    In inoefenmodus krijg je onmiddellijk feedback of je antwoord goed of fout is. 
+    Je kan bij een fout antwoord opnieuw proberen, maar je totaal aantal punten zal dan een vertekend beeld geven.
+    </li>
+    <li>
+    <strong>Laat zien</strong>: toont de oplossing, en in de meeste gevallen ook een gedetailleerde uitwerking onderaan de oefening. 
+    Als je de antwoorden hebt laten zien, is het niet meer mogelijk (noch zinvol) om je eigen antwoorden in te dienen.
+    </li>
+    <li>
+    <strong>Probeer soortgelijke vraag opnieuw</strong>: hergenereer deze vraag met andere getallen. 
+    Deze knop is voor inoefenreeksen altijd voorzien, 
+    <ul class="info">
+    <li> maar soms wordt steeds dezelfde vraag gegenereerd, of zijn de varianten erg weinig verschillend.  </li>
+    <li> soms is één variant aanzienlijk moeilijker of makkelijker dan een andere </li>
+    <li> dikwijls is het echter erg nuttig om een variant zelf te maken als je het antwoord moest 'laten zien' omdat je het niet zelf vond.</li>
+    </ul>
+    Als een vraag uit meerdere opgaven bestaat, kan je er ook voor kiezen om maar enkele opgaven te hernemen, en de rest blanco te laten. 
+    </li>
+    <li>
+    Soms zijn er deelvragen, en dan is er een knop 'Verzend antwoord' per deelvraag. 
+    </li>
+    <li>
+    Soms moet je meerdere antwoorden geven per (deel-)vraag.
+    Je krijgt dan punten per goed antwoord.
+    </li>
+    </ul>
